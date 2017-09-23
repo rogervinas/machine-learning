@@ -35,6 +35,8 @@ Theta = reshape(params(num_movies*num_features+1:end), ...
 %
 
 J = sum((R .* ((X*Theta' - Y) .^ 2))(:)) / 2;
+J = J + sum(sum(Theta .^ 2)) * lambda / 2;
+J = J + sum(sum(X .^ 2)) * lambda / 2;
 
 X_grad = zeros(size(X));
 for i = 1:num_movies

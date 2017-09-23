@@ -40,12 +40,12 @@ J = J + sum(sum(X .^ 2)) * lambda / 2;
 
 X_grad = zeros(size(X));
 for i = 1:num_movies
-  X_grad(i,:) = (R(i,:) .* (X(i,:)*Theta' - Y(i,:))) * Theta;
+  X_grad(i,:) = (R(i,:) .* (X(i,:)*Theta' - Y(i,:))) * Theta + lambda .* X(i,:);
 end
 
 Theta_grad = zeros(size(Theta));
 for j = 1:num_users
-  Theta_grad(j,:) = (R(:,j) .* (X*Theta(j,:)' - Y(:,j)))' * X;
+  Theta_grad(j,:) = (R(:,j) .* (X*Theta(j,:)' - Y(:,j)))' * X + lambda .* Theta(j,:);
 end
 
 % =============================================================
